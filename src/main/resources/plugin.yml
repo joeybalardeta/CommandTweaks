@@ -1,0 +1,7 @@
+name: Commandtweaks
+version: '${project.version}'
+main: com.core.commandtweaks.Commandtweaks
+api-version: 1.19
+load: STARTUP
+authors: [ JoeyBalardeta, DanielGeva ]
+description: A plugin for multiplayer Minecraft servers.
