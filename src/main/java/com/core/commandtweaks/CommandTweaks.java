@@ -1,26 +1,23 @@
 package com.core.commandtweaks;
 
+import lombok.Getter;
+import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 
+@Getter
 public final class CommandTweaks extends JavaPlugin {
 
-    public static String VERSION = "0.1";
-    public static String PLUGINNAME = "CommandTweaks";
-
+    private final PluginDescriptionFile pluginDescriptionFile = this.getDescription();
+    private final String VERSION = pluginDescriptionFile.getVersion();
+    private final String PLUGIN_NAME = pluginDescriptionFile.getName();
     private static CommandTweaks instance;
 
-    public static CommandTweaks getInstance(){
-        return instance;
-    }
+    @Override
+    public void onLoad() { instance = this; }
 
     @Override
-    public void onEnable() {
-        // Plugin startup logic
-
-    }
+    public void onEnable() {}
 
     @Override
-    public void onDisable() {
-        // Plugin shutdown logic
-    }
+    public void onDisable() {}
 }
