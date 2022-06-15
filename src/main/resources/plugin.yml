@@ -1,6 +1,6 @@
 name: Commandtweaks
 version: '${project.version}'
-main: com.core.commandtweaks.Commandtweaks
+main: com.core.commandtweaks.CommandTweaks
 api-version: 1.19
 load: STARTUP
 authors: [ JoeyBalardeta, DanielGeva ]
