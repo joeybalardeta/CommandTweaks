@@ -35,11 +35,13 @@ public class PlayerEvent implements Listener {
     public void onConsume(PlayerItemConsumeEvent event){
         Player p = event.getPlayer();
 
+
+        // poison Celi if she eats fish :)
         if (event.getItem().equals(new ItemStack(Material.COD)) || event.getItem().equals(new ItemStack(Material.COOKED_COD))
             || event.getItem().equals(new ItemStack(Material.SALMON)) || event.getItem().equals(new ItemStack(Material.COOKED_SALMON))
             || event.getItem().equals(new ItemStack(Material.TROPICAL_FISH)) || event.getItem().equals(new ItemStack(Material.PUFFERFISH))){
             if (p.getName().equals("smokinganthrax")){
-                p.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 120000, 3, true));
+                p.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 200, 3, true));
             }
         }
     }

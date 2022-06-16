@@ -1,6 +1,7 @@
 package com.core.commandtweaks;
 
 
+import com.core.commandtweaks.command.CommandManager;
 import com.core.commandtweaks.event.EventManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import java.util.logging.Level;
@@ -11,6 +12,8 @@ public final class CommandTweaks extends JavaPlugin {
     private static CommandTweaks instance;
 
     public EventManager eventManager;
+
+    public CommandManager commandManager;
 
     public static CommandTweaks getInstance(){
         return instance;
@@ -23,6 +26,9 @@ public final class CommandTweaks extends JavaPlugin {
 
         eventManager = new EventManager();
         eventManager.init();
+
+        commandManager = new CommandManager();
+        commandManager.init();
 
         getLogger().log(Level.INFO, PLUGINNAME + " v" + VERSION + " is online!");
     }
