@@ -3,6 +3,7 @@ package com.core.commandtweaks;
 
 import com.core.commandtweaks.command.CommandManager;
 import com.core.commandtweaks.event.EventManager;
+import com.core.commandtweaks.player.CustomNameTags;
 import org.bukkit.plugin.java.JavaPlugin;
 import java.util.logging.Level;
 
@@ -14,6 +15,8 @@ public final class CommandTweaks extends JavaPlugin {
     public EventManager eventManager;
 
     public CommandManager commandManager;
+
+    public CustomNameTags customNameTags;
 
     public static CommandTweaks getInstance(){
         return instance;
@@ -29,6 +32,9 @@ public final class CommandTweaks extends JavaPlugin {
 
         commandManager = new CommandManager();
         commandManager.init();
+
+        customNameTags = new CustomNameTags();
+        customNameTags.init();
 
         getLogger().log(Level.INFO, PLUGINNAME + " v" + VERSION + " is online!");
     }
