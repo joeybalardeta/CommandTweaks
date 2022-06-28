@@ -1,6 +1,7 @@
 package com.core.commandtweaks.event;
 
 import com.core.commandtweaks.CommandTweaks;
+import com.core.commandtweaks.player.PlayerPlus;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -24,11 +25,16 @@ public class PlayerEvent implements Listener {
     public void onJoin(PlayerJoinEvent event){
 
 
-        // delayed event, probably gonna use this to send messages to users.
+        if (!CommandTweaks.customNameTags.isInitialized()){
+            CommandTweaks.customNameTags.init();
+        }
+
+        CommandTweaks.nexus.fileIO.loadPlayerPlus(event.getPlayer());
+
+        // delayed event, probably gonna use this to send messages to users on join.
         BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
         scheduler.scheduleSyncDelayedTask(instance, new Runnable() {
             public void run() {
-
 
             }
         }, 10L);
@@ -53,24 +59,13 @@ public class PlayerEvent implements Listener {
     public void onPlayerPublicMessage(AsyncPlayerChatEvent event) {
         event.setCancelled(true);
         Player p = event.getPlayer();
+        PlayerPlus playerPlus = PlayerPlus.getPlayerPlus(p);
 
-        String rankStr = ChatColor.GREEN + "Member";
-
-        if (p.getName().equals("aclownsquad")){
-            rankStr = ChatColor.RED + "Creator";
-        }
 
 
         for (Player online : Bukkit.getOnlinePlayers()) {
-            online.sendMessage(ChatColor.WHITE + "[" + rankStr + ChatColor.WHITE + "] " + ChatColor.AQUA + p.getName() + ChatColor.WHITE + ": " + event.getMessage());
+            online.sendMessage(ChatColor.WHITE + "[" + playerPlus.getRank().toString() + ChatColor.WHITE + "] " + ChatColor.AQUA + p.getName() + ChatColor.WHITE + ": " + event.getMessage());
         }
     }
 
-    @EventHandler
-    public void moveEvent(PlayerMoveEvent event){
-        if (event.getPlayer().getName().equals("maddoxicaljedd69")){
-            event.getPlayer().setHealth(0f);
-            event.getPlayer().kickPlayer("Face the consequences of your actions.");
-        }
-    }
 }

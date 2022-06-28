@@ -3,7 +3,10 @@ package com.core.commandtweaks;
 
 import com.core.commandtweaks.command.CommandManager;
 import com.core.commandtweaks.event.EventManager;
+import com.core.commandtweaks.nexus.Nexus;
 import com.core.commandtweaks.player.CustomNameTags;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import java.util.logging.Level;
 
@@ -12,11 +15,13 @@ public final class CommandTweaks extends JavaPlugin {
     public static String PLUGINNAME = "CommandTweaks";
     private static CommandTweaks instance;
 
-    public EventManager eventManager;
+    public static EventManager eventManager;
 
-    public CommandManager commandManager;
+    public static CommandManager commandManager;
 
-    public CustomNameTags customNameTags;
+    public static CustomNameTags customNameTags;
+
+    public static Nexus nexus;
 
     public static CommandTweaks getInstance(){
         return instance;
@@ -35,6 +40,13 @@ public final class CommandTweaks extends JavaPlugin {
 
         customNameTags = new CustomNameTags();
         customNameTags.init();
+
+        nexus = new Nexus();
+        nexus.init();
+
+        for (Player online : Bukkit.getOnlinePlayers()) {
+            nexus.fileIO.loadPlayerPlus(online);
+        }
 
         getLogger().log(Level.INFO, PLUGINNAME + " v" + VERSION + " is online!");
     }

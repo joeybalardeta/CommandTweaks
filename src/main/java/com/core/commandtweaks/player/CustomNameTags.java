@@ -9,10 +9,17 @@ import org.bukkit.scoreboard.Scoreboard;
 public class CustomNameTags {
     private Scoreboard scoreBoard;
 
+    private boolean initialized = false;
+
     public void init(){
+        if (Bukkit.getOnlinePlayers().size() == 0){
+            return;
+        }
         scoreBoard = Bukkit.getScoreboardManager().getMainScoreboard();
 
         registerPlayerHealthTag();
+
+        initialized = true;
     }
 
     public void registerPlayerHealthTag(){
@@ -23,5 +30,10 @@ public class CustomNameTags {
         Objective obj = scoreBoard.registerNewObjective("health", "health", ChatColor.RED  + "❤");
         obj.setDisplaySlot(DisplaySlot.BELOW_NAME);
 
+    }
+
+
+    public boolean isInitialized(){
+        return initialized;
     }
 }

@@ -1,6 +1,8 @@
 package com.core.commandtweaks.command;
 
 import com.core.commandtweaks.CommandTweaks;
+import com.core.commandtweaks.command.subcommands.RankCommand;
+import com.core.commandtweaks.command.subcommands.SaveCommand;
 import com.core.commandtweaks.command.subcommands.TopCommand;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.command.Command;
@@ -25,6 +27,8 @@ public class CommandManager implements CommandExecutor {
     public void init(){
         instance.getCommand(this.getRootCommand()).setExecutor(this);
         this.subCommands.add(new TopCommand());
+        this.subCommands.add(new RankCommand());
+        this.subCommands.add(new SaveCommand());
     }
 
     @Override
