@@ -4,6 +4,7 @@ import com.core.commandtweaks.CommandTweaks;
 import com.core.commandtweaks.command.subcommands.RankCommand;
 import com.core.commandtweaks.command.subcommands.SaveCommand;
 import com.core.commandtweaks.command.subcommands.TopCommand;
+import com.core.commandtweaks.utils.Utils;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -13,6 +14,7 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.logging.Level;
 
 public class CommandManager implements CommandExecutor {
     private ArrayList<SubCommand> subCommands = new ArrayList<SubCommand>();
@@ -29,6 +31,7 @@ public class CommandManager implements CommandExecutor {
         this.subCommands.add(new TopCommand());
         this.subCommands.add(new RankCommand());
         this.subCommands.add(new SaveCommand());
+        Utils.consoleLog(Level.INFO, "CommandManager (Plugin command parsing/routing) online.");
     }
 
     @Override

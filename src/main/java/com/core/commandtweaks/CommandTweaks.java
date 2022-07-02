@@ -5,6 +5,7 @@ import com.core.commandtweaks.command.CommandManager;
 import com.core.commandtweaks.event.EventManager;
 import com.core.commandtweaks.nexus.Nexus;
 import com.core.commandtweaks.player.CustomNameTags;
+import com.core.commandtweaks.vanguard.Vanguard;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -22,6 +23,8 @@ public final class CommandTweaks extends JavaPlugin {
     public static CustomNameTags customNameTags;
 
     public static Nexus nexus;
+
+    public static Vanguard vanguard;
 
     public static CommandTweaks getInstance(){
         return instance;
@@ -44,9 +47,10 @@ public final class CommandTweaks extends JavaPlugin {
         nexus = new Nexus();
         nexus.init();
 
-        for (Player online : Bukkit.getOnlinePlayers()) {
-            nexus.fileIO.loadPlayerPlus(online);
-        }
+        vanguard = new Vanguard();
+        vanguard.init();
+
+
 
         getLogger().log(Level.INFO, PLUGINNAME + " v" + VERSION + " is online!");
     }

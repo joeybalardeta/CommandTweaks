@@ -4,7 +4,6 @@ import com.core.commandtweaks.CommandTweaks;
 import com.core.commandtweaks.player.Faction;
 import com.core.commandtweaks.player.PlayerPlus;
 import com.core.commandtweaks.player.Rank;
-import jdk.jfr.internal.LogLevel;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitScheduler;
@@ -51,6 +50,18 @@ public class FileIO {
             }
         }
         Nexus.factionDataConfig = YamlConfiguration.loadConfiguration(Nexus.factionData);
+
+        // create/open faction data file
+        Nexus.vanguardData = new File(instance.getDataFolder(), "vanguardData.yml");
+        if (!Nexus.vanguardData.exists()) {
+            Nexus.vanguardData.getParentFile().mkdirs();
+            try {
+                Nexus.vanguardData.createNewFile();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+        Nexus.vanguardDataConfig = YamlConfiguration.loadConfiguration(Nexus.vanguardData);
     }
 
     // save all plugin data files
@@ -76,27 +87,8 @@ public class FileIO {
             e.printStackTrace();
         }
 
-        CommandTweaks.getInstance().getLogger().log(Level.INFO, "Nexus | Writing data to storage.");
-    }
-
-    // save all plugin data files
-    public static void saveStatic(){
         try {
-            Nexus.settingsConfig.save(Nexus.settings);
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-        try {
-            Nexus.playerDataConfig.save(Nexus.playerData);
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-        try {
-            Nexus.factionDataConfig.save(Nexus.factionData);
+            Nexus.vanguardDataConfig.save(Nexus.vanguardData);
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -109,6 +101,7 @@ public class FileIO {
 
     public void writePlayerPlus(PlayerPlus playerPlus){
         Nexus.playerDataConfig.set("users." + playerPlus.getPlayer().getUniqueId() + ".rank", playerPlus.getRank().toStringNoColor());
+        Nexus.playerDataConfig.set("users." + playerPlus.getPlayer().getUniqueId() + ".name", playerPlus.getPlayer().getDisplayName());
     }
 
     public void loadPlayerPlus(Player p){
@@ -128,7 +121,7 @@ public class FileIO {
         scheduler.scheduleSyncRepeatingTask(CommandTweaks.getInstance(), new Runnable() {
             @Override
             public void run() {
-                FileIO.saveStatic(); // save all plugin data files
+                CommandTweaks.nexus.fileIO.save(); // save all plugin data files
             }
         }, 0L, 1200L);
     }
