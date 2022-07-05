@@ -17,7 +17,11 @@ public class OreRatio {
         int netherrackMined = target.getStatistic(Statistic.MINE_BLOCK, Material.NETHERRACK);
         int ancientDebrisMined = target.getStatistic(Statistic.MINE_BLOCK, Material.ANCIENT_DEBRIS);
 
-        if (netherrackMined / ancientDebrisMined < 500){
+        if (netherrackMined < 200 || ancientDebrisMined < 8){
+            return true;
+        }
+
+        if (!(netherrackMined < 200 || ancientDebrisMined < 8) && (netherrackMined / ancientDebrisMined < 500)){
             return false;
         }
 

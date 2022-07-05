@@ -10,7 +10,7 @@ public class HomeCommand extends SubCommand {
 
     public HomeCommand() {
         this.subCommandName = "Home";
-        this.subCommandInfo = "Teleports player to their spawn point";
+        this.subCommandInfo = "Teleport player to their spawn point";
         this.subCommandAliases = new String[0];
     }
 
@@ -21,20 +21,5 @@ public class HomeCommand extends SubCommand {
             home = p.getWorld().getSpawnLocation();
         }
         p.teleport(home);
-    }
-
-    @Override
-    public String getName() {
-        return this.subCommandName;
-    }
-
-    @Override
-    public String getInfo() {
-        return this.subCommandInfo;
-    }
-
-    @Override
-    public String[] getAliases() {
-        return this.subCommandAliases;
     }
 }

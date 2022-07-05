@@ -13,7 +13,7 @@ public class RankCommand extends SubCommand {
 
     public RankCommand(){
         this.subCommandName = "rank";
-        this.subCommandInfo = "Set a player's rank.";
+        this.subCommandInfo = "Set a player's rank";
         this.subCommandAliases = new String[0];
     }
 
@@ -42,20 +42,5 @@ public class RankCommand extends SubCommand {
         playerPlus.setRank(new Rank(args[2]));
 
         Utils.sendMessage(p, "Set " + ChatColor.AQUA + p.getName() + ChatColor.WHITE + "'s rank to " + playerPlus.getRank().toString());
-    }
-
-    @Override
-    public String getName() {
-        return subCommandName;
-    }
-
-    @Override
-    public String getInfo() {
-        return subCommandInfo;
-    }
-
-    @Override
-    public String[] getAliases() {
-        return subCommandAliases;
     }
 }

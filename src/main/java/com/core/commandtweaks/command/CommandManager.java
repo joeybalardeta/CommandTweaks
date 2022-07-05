@@ -1,10 +1,7 @@
 package com.core.commandtweaks.command;
 
 import com.core.commandtweaks.CommandTweaks;
-import com.core.commandtweaks.command.subcommands.InfoCommand;
-import com.core.commandtweaks.command.subcommands.RankCommand;
-import com.core.commandtweaks.command.subcommands.SaveCommand;
-import com.core.commandtweaks.command.subcommands.TopCommand;
+import com.core.commandtweaks.command.subcommands.*;
 import com.core.commandtweaks.utils.Utils;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.command.Command;
@@ -33,6 +30,7 @@ public class CommandManager implements CommandExecutor {
         this.subCommands.add(new RankCommand());
         this.subCommands.add(new SaveCommand());
         this.subCommands.add(new InfoCommand());
+        this.subCommands.add(new HelpCommand());
         Utils.consoleLog(Level.INFO, "CommandManager (Plugin command parsing/routing) online.");
     }
 
@@ -60,5 +58,9 @@ public class CommandManager implements CommandExecutor {
         }
 
         return false;
+    }
+
+    public ArrayList<SubCommand> getSubCommands(){
+        return this.subCommands;
     }
 }

@@ -4,7 +4,7 @@ import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 
-public abstract class SubCommand {
+public class SubCommand {
     public SubCommand() {
 
     }
@@ -17,11 +17,19 @@ public abstract class SubCommand {
     public String[] subCommandAliases;
 
     // subcommand functions
-    public abstract void onCommand(Player p, String[] args);
+    public void onCommand(Player p, String[] args){
 
-    public abstract String getName();
+    }
 
-    public abstract String getInfo();
+    public String getName(){
+        return subCommandName;
+    }
 
-    public abstract String[] getAliases();
+    public String getInfo(){
+        return subCommandInfo;
+    }
+
+    public String[] getAliases(){
+        return subCommandAliases;
+    }
 }

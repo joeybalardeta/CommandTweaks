@@ -24,19 +24,4 @@ public class SaveCommand extends SubCommand {
         CommandTweaks.nexus.fileIO.save();
         Utils.sendMessage(p, "Saved all plugin files!");
     }
-
-    @Override
-    public String getName() {
-        return subCommandName;
-    }
-
-    @Override
-    public String getInfo() {
-        return subCommandInfo;
-    }
-
-    @Override
-    public String[] getAliases() {
-        return subCommandAliases;
-    }
 }

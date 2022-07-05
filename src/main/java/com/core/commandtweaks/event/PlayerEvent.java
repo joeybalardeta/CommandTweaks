@@ -8,10 +8,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
-import org.bukkit.event.player.PlayerItemConsumeEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -38,6 +35,11 @@ public class PlayerEvent implements Listener {
 
             }
         }, 10L);
+    }
+
+    @EventHandler
+    public void onLeave(PlayerQuitEvent event){
+        PlayerPlus.getPlayerPlus(event.getPlayer()).removePlayerPlus();
     }
 
     @EventHandler

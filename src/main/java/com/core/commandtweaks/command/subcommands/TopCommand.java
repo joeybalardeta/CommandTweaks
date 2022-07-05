@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class TopCommand extends SubCommand {
     public TopCommand(){
         this.subCommandName = "top";
-        this.subCommandInfo = "Teleport player to the top y coordinate at their location.";
+        this.subCommandInfo = "Teleport player to the top y coordinate at their location";
         this.subCommandAliases = new String[0];
     }
 
@@ -38,20 +38,5 @@ public class TopCommand extends SubCommand {
         l = new Location(p.getWorld(), p.getLocation().getX() + xPlus, p.getWorld().getHighestBlockYAt(p.getLocation()) + 1, p.getLocation().getZ());
 
         p.teleport(l);
-    }
-
-    @Override
-    public String getName() {
-        return subCommandName;
-    }
-
-    @Override
-    public String getInfo() {
-        return subCommandInfo;
-    }
-
-    @Override
-    public String[] getAliases() {
-        return subCommandAliases;
     }
 }
