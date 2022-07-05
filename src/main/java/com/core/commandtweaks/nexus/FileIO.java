@@ -4,12 +4,18 @@ import com.core.commandtweaks.CommandTweaks;
 import com.core.commandtweaks.player.Faction;
 import com.core.commandtweaks.player.PlayerPlus;
 import com.core.commandtweaks.player.Rank;
+import org.bukkit.Bukkit;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitScheduler;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Map;
+import java.util.TimeZone;
 import java.util.logging.Level;
 
 public class FileIO {
@@ -26,6 +32,18 @@ public class FileIO {
             }
         }
         Nexus.settingsConfig = YamlConfiguration.loadConfiguration(Nexus.settings);
+
+        // create/open player count file
+        Nexus.playerCount = new File(instance.getDataFolder(), "playerCount.yml");
+        if (!Nexus.playerCount.exists()) {
+            Nexus.playerCount.getParentFile().mkdirs();
+            try {
+                Nexus.playerCount.createNewFile();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+        Nexus.playerCountConfig = YamlConfiguration.loadConfiguration(Nexus.playerCount);
 
         // create/open player data file
         Nexus.playerData = new File(instance.getDataFolder(), "playerData.yml");
@@ -51,7 +69,7 @@ public class FileIO {
         }
         Nexus.factionDataConfig = YamlConfiguration.loadConfiguration(Nexus.factionData);
 
-        // create/open faction data file
+        // create/open vanguard (anti-cheat) data file
         Nexus.vanguardData = new File(instance.getDataFolder(), "vanguardData.yml");
         if (!Nexus.vanguardData.exists()) {
             Nexus.vanguardData.getParentFile().mkdirs();
@@ -62,36 +80,36 @@ public class FileIO {
             }
         }
         Nexus.vanguardDataConfig = YamlConfiguration.loadConfiguration(Nexus.vanguardData);
+
+        // create/open faction data file
+        Nexus.modLog = new File(instance.getDataFolder(), "modLog.yml");
+        if (!Nexus.modLog.exists()) {
+            Nexus.modLog.getParentFile().mkdirs();
+            try {
+                Nexus.modLog.createNewFile();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+        Nexus.modLogConfig = YamlConfiguration.loadConfiguration(Nexus.modLog);
+
+        Nexus.pluginFiles.put(Nexus.settings, Nexus.settingsConfig);
+        Nexus.pluginFiles.put(Nexus.playerCount, Nexus.playerCountConfig);
+        Nexus.pluginFiles.put(Nexus.playerData, Nexus.playerDataConfig);
+        Nexus.pluginFiles.put(Nexus.factionData, Nexus.factionDataConfig);
+        Nexus.pluginFiles.put(Nexus.vanguardData, Nexus.vanguardDataConfig);
+        Nexus.pluginFiles.put(Nexus.modLog, Nexus.modLogConfig);
     }
 
     // save all plugin data files
     public void save(){
-        try {
-            Nexus.settingsConfig.save(Nexus.settings);
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-        try {
-            Nexus.playerDataConfig.save(Nexus.playerData);
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-        try {
-            Nexus.factionDataConfig.save(Nexus.factionData);
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-        try {
-            Nexus.vanguardDataConfig.save(Nexus.vanguardData);
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+        for (Map.Entry<File, FileConfiguration> entry : Nexus.pluginFiles.entrySet()){
+            try {
+                entry.getValue().save(entry.getKey());
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         }
 
         CommandTweaks.getInstance().getLogger().log(Level.INFO, "Nexus | Writing data to storage.");
@@ -116,6 +134,20 @@ public class FileIO {
         playerPlus.setFaction(faction);
     }
 
+    public void logPlayerCount(){
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm z");
+        formatter.setTimeZone(TimeZone.getTimeZone("PST"));
+        Date date = new Date(System.currentTimeMillis());
+        Nexus.playerCountConfig.set("player-count." + formatter.format(date), Bukkit.getOnlinePlayers().size());
+    }
+
+    public void logCommand(String playerName, String command){
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
+        formatter.setTimeZone(TimeZone.getTimeZone("PST"));
+        Date date = new Date(System.currentTimeMillis());
+        Nexus.modLogConfig.set("mod-log." + formatter.format(date), playerName + " issued server command: " + command);
+    }
+
     public void scheduleFileTasks(){
         BukkitScheduler scheduler = CommandTweaks.getInstance().getServer().getScheduler();
         scheduler.scheduleSyncRepeatingTask(CommandTweaks.getInstance(), new Runnable() {
@@ -124,5 +156,12 @@ public class FileIO {
                 CommandTweaks.nexus.fileIO.save(); // save all plugin data files
             }
         }, 0L, 1200L);
+
+        scheduler.scheduleSyncRepeatingTask(CommandTweaks.getInstance(), new Runnable() {
+            @Override
+            public void run() {
+                CommandTweaks.nexus.fileIO.logPlayerCount();
+            }
+        }, 0L, 12000L);
     }
 }

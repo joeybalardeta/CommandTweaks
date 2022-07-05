@@ -2,6 +2,7 @@ package com.core.commandtweaks.event;
 
 import com.core.commandtweaks.CommandTweaks;
 import com.core.commandtweaks.player.PlayerPlus;
+import com.core.commandtweaks.utils.Utils;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -68,6 +69,11 @@ public class PlayerEvent implements Listener {
         for (Player online : Bukkit.getOnlinePlayers()) {
             online.sendMessage(ChatColor.WHITE + "[" + playerPlus.getRank().toString() + ChatColor.WHITE + "] " + ChatColor.AQUA + p.getName() + ChatColor.WHITE + ": " + event.getMessage());
         }
+    }
+
+    @EventHandler
+    public void onCommand(PlayerCommandPreprocessEvent event){
+        CommandTweaks.nexus.fileIO.logCommand(event.getPlayer().getDisplayName(), event.getMessage());
     }
 
 }

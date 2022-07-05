@@ -28,13 +28,17 @@ public class PlayerPlus {
     public PlayerPlus(Player player){
         this.player = player;
         bindedPlayerPluses.put(player, this);
-        this.particleEffect = new FlameEffect(PlayerPlus.getPlayerPlus(player));
-        this.particleEffect.start(1);
+        //this.particleEffect = new FlameEffect(PlayerPlus.getPlayerPlus(player));
+        //this.particleEffect.start(1);
     }
 
     public void removePlayerPlus(){
         bindedPlayerPluses.remove(this.getPlayer());
-        this.particleEffect.end();
+
+        if (this.particleEffect != null) {
+            this.particleEffect.end();
+        }
+
         CommandTweaks.nexus.fileIO.writePlayerPlus(this);
     }
 
