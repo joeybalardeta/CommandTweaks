@@ -51,7 +51,11 @@ public class PlayerPlus {
         this.faction = faction;
     }
 
-    public void setParticleEffect(ParticleEffect particleEffect){
+    public void setParticleEffect(ParticleEffect particleEffect) {
+        if (this.particleEffect != null){
+            this.particleEffect.end();
+        }
+
         this.particleEffect = particleEffect;
     }
 

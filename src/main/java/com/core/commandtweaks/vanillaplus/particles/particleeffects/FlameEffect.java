@@ -12,6 +12,7 @@ import java.util.UUID;
 public class FlameEffect extends ParticleEffect {
     public FlameEffect(PlayerPlus playerPlus) {
         super(playerPlus);
+        this.start(1);
     }
 
     @Override

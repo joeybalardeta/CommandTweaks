@@ -20,13 +20,12 @@ public class RankCommand extends SubCommand {
     @Override
     public void onCommand(Player p, String[] args) {
 
-        if (!PlayerPlus.getPlayerPlus(p).getRank().toStringNoColor().equals("Creator")
-            && !PlayerPlus.getPlayerPlus(p).getRank().toStringNoColor().equals("Moderator")) {
+        if (!PlayerPlus.getPlayerPlus(p).getRank().toStringNoColor().equals("Creator")) {
             Utils.sendError(p, "You are not authorized to use this command!");
             return;
         }
 
-        if (args.length != 3) {
+        if (args.length < 3) {
             Utils.sendError(p, "Incorrect amount of arguments!");
             return;
         }
@@ -37,10 +36,22 @@ public class RankCommand extends SubCommand {
             Utils.sendError(p, "Player is not online!");
             return;
         }
-        PlayerPlus playerPlus = PlayerPlus.getPlayerPlus(target);
+        PlayerPlus targetPlayerPlus = PlayerPlus.getPlayerPlus(target);
 
-        playerPlus.setRank(new Rank(args[2]));
+        String rankStr = "";
 
-        Utils.sendMessage(p, "Set " + ChatColor.AQUA + p.getName() + ChatColor.WHITE + "'s rank to " + playerPlus.getRank().toString());
+        for (int i = 2; i < args.length; i++){
+            if (i == args.length - 1){
+                rankStr += args[i];
+            }
+            else{
+                rankStr += args[i] + " ";
+            }
+        }
+
+        targetPlayerPlus.setRank(new Rank(rankStr));
+
+        Utils.sendMessage(p, "Set " + ChatColor.AQUA + targetPlayerPlus.getPlayer().getName() + ChatColor.WHITE + "'s rank to " + targetPlayerPlus.getRank().toString());
+        Utils.sendMessage(target, "Your rank has been set to " + targetPlayerPlus.getRank().toString());
     }
 }

@@ -31,6 +31,7 @@ public class CommandManager implements CommandExecutor {
         this.subCommands.add(new SaveCommand());
         this.subCommands.add(new InfoCommand());
         this.subCommands.add(new HelpCommand());
+        this.subCommands.add(new ParticleCommand());
         Utils.consoleLog(Level.INFO, "CommandManager (Plugin command parsing/routing) online.");
     }
 

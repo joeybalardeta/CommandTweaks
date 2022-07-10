@@ -26,6 +26,9 @@ public class Rank {
         else if (this.rankName.equals("Streamer")){
             this.rankColor = ChatColor.LIGHT_PURPLE;
         }
+        else if (this.rankName.equals("Joe Exotic")){
+            this.rankColor = ChatColor.GOLD;
+        }
         else if (this.rankName.equals("Member")){
             this.rankColor = ChatColor.GREEN;
         }
