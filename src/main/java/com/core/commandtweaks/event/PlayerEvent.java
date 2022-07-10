@@ -27,6 +27,7 @@ public class PlayerEvent implements Listener {
             CommandTweaks.customNameTags.init();
         }
 
+
         CommandTweaks.nexus.fileIO.loadPlayerPlus(event.getPlayer());
 
         // delayed event, probably gonna use this to send messages to users on join.

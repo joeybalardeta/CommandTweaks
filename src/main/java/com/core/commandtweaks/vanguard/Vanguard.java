@@ -53,6 +53,9 @@ public class Vanguard {
     }
 
     public boolean isFlagged(UUID uuid) {
+        if (Nexus.vanguardDataConfig.getConfigurationSection("potential-cheaters") == null){
+            return false;
+        }
         if (Nexus.vanguardDataConfig.getConfigurationSection("potential-cheaters").contains(uuid.toString())){
             return true;
         }
