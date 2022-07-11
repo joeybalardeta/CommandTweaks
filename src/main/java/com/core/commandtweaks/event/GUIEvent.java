@@ -10,7 +10,10 @@ import org.bukkit.event.inventory.InventoryCloseEvent;
 public class GUIEvent implements Listener {
     @EventHandler
     public void onInventoryClose(InventoryCloseEvent event) {
-        PlayerPlus.getPlayerPlus((Player) event.getPlayer()).setGUI(null);
+        if (PlayerPlus.getPlayerPlus((Player) event.getPlayer()) != null){
+            PlayerPlus.getPlayerPlus((Player) event.getPlayer()).setGUI(null);
+        }
+
     }
 
     @EventHandler
