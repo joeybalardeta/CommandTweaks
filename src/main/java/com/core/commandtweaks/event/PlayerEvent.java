@@ -20,9 +20,7 @@ public class PlayerEvent implements Listener {
 
 
     @EventHandler
-    public void onJoin(PlayerJoinEvent event){
-
-
+    public void onJoin(PlayerJoinEvent event) {
         if (!CommandTweaks.customNameTags.isInitialized()){
             CommandTweaks.customNameTags.init();
         }
@@ -45,7 +43,7 @@ public class PlayerEvent implements Listener {
     }
 
     @EventHandler
-    public void onConsume(PlayerItemConsumeEvent event){
+    public void onConsume(PlayerItemConsumeEvent event) {
         Player p = event.getPlayer();
 
 
@@ -73,7 +71,7 @@ public class PlayerEvent implements Listener {
     }
 
     @EventHandler
-    public void onCommand(PlayerCommandPreprocessEvent event){
+    public void onCommand(PlayerCommandPreprocessEvent event) {
         CommandTweaks.nexus.fileIO.logCommand(event.getPlayer().getDisplayName(), event.getMessage());
     }
 

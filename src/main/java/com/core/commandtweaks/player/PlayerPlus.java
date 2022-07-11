@@ -3,7 +3,6 @@ package com.core.commandtweaks.player;
 import com.core.commandtweaks.CommandTweaks;
 import com.core.commandtweaks.gui.GUI;
 import com.core.commandtweaks.vanillaplus.particles.ParticleEffect;
-import com.core.commandtweaks.vanillaplus.particles.particleeffects.FlameEffect;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
@@ -28,8 +27,6 @@ public class PlayerPlus {
     public PlayerPlus(Player player){
         this.player = player;
         bindedPlayerPluses.put(player, this);
-        //this.particleEffect = new FlameEffect(PlayerPlus.getPlayerPlus(player));
-        //this.particleEffect.start(1);
     }
 
     public void removePlayerPlus(){
@@ -57,6 +54,17 @@ public class PlayerPlus {
         }
 
         this.particleEffect = particleEffect;
+    }
+
+    public void setGUI(GUI gui) {
+        this.gui = gui;
+        if (this.gui != null) {
+            this.getPlayer().openInventory(this.gui.getInventory());
+        }
+    }
+
+    public GUI getGUI() {
+        return this.gui;
     }
 
     public Rank getRank(){

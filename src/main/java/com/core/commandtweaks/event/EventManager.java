@@ -9,5 +9,6 @@ public class EventManager {
         instance = CommandTweaks.getInstance();
 
         instance.getServer().getPluginManager().registerEvents(new PlayerEvent(), instance);
+        instance.getServer().getPluginManager().registerEvents(new GUIEvent(), instance);
     }
 }
