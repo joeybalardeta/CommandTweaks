@@ -28,7 +28,9 @@ public class CustomNameTags {
         }
 
         Objective obj = scoreBoard.registerNewObjective("health", "health", ChatColor.RED  + "❤");
+        // Objective obj2 = scoreBoard.registerNewObjective("deaths", "deaths", ChatColor.WHITE  + " Deaths");
         obj.setDisplaySlot(DisplaySlot.BELOW_NAME);
+        // obj2.setDisplaySlot(DisplaySlot.BELOW_NAME);
 
     }
 

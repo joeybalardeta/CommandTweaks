@@ -23,6 +23,9 @@ public class Rank {
         else if (this.rankName.equals("Moderator")){
             this.rankColor = ChatColor.BLUE;
         }
+        else if (this.rankName.equals("Master Builder")){
+            this.rankColor = ChatColor.AQUA;
+        }
         else if (this.rankName.equals("Streamer")){
             this.rankColor = ChatColor.LIGHT_PURPLE;
         }

@@ -23,9 +23,9 @@ public class InfoCommand extends SubCommand {
         Utils.sendMessage(p, ChatColor.AQUA + "Authors: " + ChatColor.WHITE + "Joey Balardeta and Daniel Geva");
         Utils.sendMessage(p, ChatColor.AQUA + "Version: " + ChatColor.WHITE + CommandTweaks.VERSION);
 
-        TextComponent message = new TextComponent("GitHub");
+        TextComponent message = new TextComponent(ChatColor.DARK_AQUA + "GitHub");
         message.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://github.com/joeybalardeta/CommandTweaks"));
-        message.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text("Visit the GitHub repository!")));
+        message.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(ChatColor.DARK_AQUA + "" + ChatColor.ITALIC + "Visit the GitHub repository!")));
         Utils.sendAdvancedMessage(p, message);
     }
 }

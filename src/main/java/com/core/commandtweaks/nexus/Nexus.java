@@ -1,6 +1,5 @@
 package com.core.commandtweaks.nexus;
 
-import com.core.commandtweaks.CommandTweaks;
 import com.core.commandtweaks.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;

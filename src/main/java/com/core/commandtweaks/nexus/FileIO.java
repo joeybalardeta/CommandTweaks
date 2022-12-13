@@ -112,7 +112,7 @@ public class FileIO {
             }
         }
 
-        CommandTweaks.getInstance().getLogger().log(Level.INFO, "Nexus | Writing data to storage.");
+        // CommandTweaks.getInstance().getLogger().log(Level.INFO, "Nexus | Writing data to storage.");
     }
 
 

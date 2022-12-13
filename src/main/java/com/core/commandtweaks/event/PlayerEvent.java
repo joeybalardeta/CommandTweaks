@@ -39,6 +39,7 @@ public class PlayerEvent implements Listener {
 
     @EventHandler
     public void onLeave(PlayerQuitEvent event){
+        CommandTweaks.nexus.fileIO.writePlayerPlus(PlayerPlus.getPlayerPlus(event.getPlayer()));
         PlayerPlus.getPlayerPlus(event.getPlayer()).removePlayerPlus();
     }
 
@@ -60,19 +61,14 @@ public class PlayerEvent implements Listener {
     @EventHandler
     public void onPlayerPublicMessage(AsyncPlayerChatEvent event) {
         event.setCancelled(true);
-        Player p = event.getPlayer();
-        PlayerPlus playerPlus = PlayerPlus.getPlayerPlus(p);
+        Player player = event.getPlayer();
 
 
-
-        for (Player online : Bukkit.getOnlinePlayers()) {
-            online.sendMessage(ChatColor.WHITE + "[" + playerPlus.getRank().toString() + ChatColor.WHITE + "] " + ChatColor.AQUA + p.getName() + ChatColor.WHITE + ": " + event.getMessage());
-        }
+        Utils.sendFauxChatMessage(player, event.getMessage());
     }
 
     @EventHandler
     public void onCommand(PlayerCommandPreprocessEvent event) {
         CommandTweaks.nexus.fileIO.logCommand(event.getPlayer().getDisplayName(), event.getMessage());
     }
-
 }

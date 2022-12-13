@@ -1,6 +1,7 @@
 package com.core.commandtweaks.command.subcommands;
 
 import com.core.commandtweaks.command.SubCommand;
+import com.core.commandtweaks.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -23,6 +24,7 @@ public class TopCommand extends SubCommand {
         Location l;
 
         if (p.getWorld().getEnvironment().equals(World.Environment.NETHER)){
+            Utils.sendError(p, "You cannot use '/ct top' in the Nether!");
             return;
         }
 
