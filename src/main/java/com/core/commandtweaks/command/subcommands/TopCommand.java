@@ -37,7 +37,7 @@ public class TopCommand extends SubCommand {
             lCheck = new Location(p.getWorld(), p.getLocation().getX() + xPlus, p.getWorld().getHighestBlockYAt(p.getLocation()) - 1, p.getLocation().getZ());
         }
 
-        l = new Location(p.getWorld(), p.getLocation().getX() + xPlus, p.getWorld().getHighestBlockYAt(p.getLocation()) + 1, p.getLocation().getZ());
+        l = new Location(p.getWorld(), p.getLocation().getX() + xPlus, p.getWorld().getHighestBlockYAt(p.getLocation()) + 1, p.getLocation().getZ(), p.getLocation().getYaw(), p.getLocation().getPitch());
 
         p.teleport(l);
     }

@@ -26,7 +26,6 @@ public class CommandManager implements CommandExecutor {
 
     public void init(){
         instance.getCommand(this.getRootCommand()).setExecutor(this);
-        this.subCommands.add(new TopCommand());
         this.subCommands.add(new RankCommand());
         this.subCommands.add(new SaveCommand());
         this.subCommands.add(new InfoCommand());
