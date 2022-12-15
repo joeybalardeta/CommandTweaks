@@ -8,6 +8,7 @@ import com.core.commandtweaks.player.CustomNameTags;
 import com.core.commandtweaks.vanguard.Vanguard;
 import com.core.commandtweaks.vanillaplus.singleplayersleep.SinglePlayerSleep;
 import org.bukkit.Bukkit;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import java.util.logging.Level;
@@ -55,6 +56,17 @@ public final class CommandTweaks extends JavaPlugin {
 
         singlePlayerSleep = new SinglePlayerSleep();
         singlePlayerSleep.init();
+
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(CommandTweaks.getInstance(), new Runnable() {
+            @Override
+            public void run(){
+                for (Player online : Bukkit.getOnlinePlayers()) {
+                    if (online.getWorld().getEnvironment().equals(World.Environment.THE_END)) {
+                        online.setHealth(0.0);
+                    }
+                }
+            }
+        }, 0, 10L);
 
 
         getLogger().log(Level.INFO, PLUGINNAME + " v" + VERSION + " is online!");
