@@ -75,6 +75,9 @@ public final class CommandTweaks extends JavaPlugin {
     @Override
     public void onDisable() {
         // Plugin shutdown logic
+
+        CommandTweaks.nexus.fileIO.save();
+
         instance = null;
     }
 }

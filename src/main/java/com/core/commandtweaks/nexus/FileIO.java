@@ -102,17 +102,30 @@ public class FileIO {
     }
 
     // save all plugin data files
-    public void save(){
-        for (Map.Entry<File, FileConfiguration> entry : Nexus.pluginFiles.entrySet()){
-            try {
-                entry.getValue().save(entry.getKey());
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        }
+    public void save() {
 
-        // CommandTweaks.getInstance().getLogger().log(Level.INFO, "Nexus | Writing data to storage.");
+        long delay = 0L;
+
+        for (Map.Entry<File, FileConfiguration> entry : Nexus.pluginFiles.entrySet()) {
+
+            delay += 1L;
+
+            // schedule a delayed task of saving a file to spread the load out more evenly
+            BukkitScheduler scheduler = CommandTweaks.getInstance().getServer().getScheduler();
+            scheduler.scheduleSyncDelayedTask(CommandTweaks.getInstance(), new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        entry.getValue().save(entry.getKey());
+                    } catch (IOException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                }
+            }, delay);
+
+            // CommandTweaks.getInstance().getLogger().log(Level.INFO, "Nexus | Writing data to storage.");
+        }
     }
 
 
@@ -155,7 +168,7 @@ public class FileIO {
             public void run() {
                 CommandTweaks.nexus.fileIO.save(); // save all plugin data files
             }
-        }, 0L, 1200L);
+        }, 0L, 6000L);
 
         scheduler.scheduleSyncRepeatingTask(CommandTweaks.getInstance(), new Runnable() {
             @Override
