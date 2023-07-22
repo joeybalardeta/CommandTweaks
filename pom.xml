@@ -6,7 +6,7 @@
 
     <groupId>com.core.commandtweaks</groupId>
     <artifactId>commandtweaks</artifactId>
-    <version>0.1</version>
+    <version>0.2</version>
     <packaging>jar</packaging>
 
     <name>Commandtweaks</name>
@@ -68,8 +68,7 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.19-R0.1-SNAPSHOT</version>
-            <scope>provided</scope>
+            <version>1.20.1-R0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
 </project>

@@ -14,7 +14,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.util.logging.Level;
 
 public final class CommandTweaks extends JavaPlugin {
-    public static String VERSION = "0.1";
+    public static String VERSION = "0.2";
     public static String PLUGINNAME = "CommandTweaks";
     private static CommandTweaks instance;
 
