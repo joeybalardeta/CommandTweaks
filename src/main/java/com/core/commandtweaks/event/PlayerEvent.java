@@ -1,6 +1,8 @@
 package com.core.commandtweaks.event;
 
 import com.core.commandtweaks.CommandTweaks;
+import com.core.commandtweaks.nexus.FileIO;
+import com.core.commandtweaks.nexus.Nexus;
 import com.core.commandtweaks.player.PlayerPlus;
 import com.core.commandtweaks.utils.Utils;
 import net.md_5.bungee.api.ChatColor;
@@ -60,6 +62,9 @@ public class PlayerEvent implements Listener {
 
     @EventHandler
     public void onPlayerPublicMessage(AsyncPlayerChatEvent event) {
+        if (!CommandTweaks.nexus.fileIO.getFauxChatStatus()) {
+            return;
+        }
         event.setCancelled(true);
         Player player = event.getPlayer();
 

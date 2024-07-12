@@ -82,10 +82,6 @@ public class SinglePlayerSleep {
                 CommandTweaks.singlePlayerSleep.countSleeping();
 
                 if (CommandTweaks.singlePlayerSleep.getNumSleepingChanged()) {
-                    for (Player online : Bukkit.getOnlinePlayers()) {
-                        // Utils.sendMessage(online, CommandTweaks.singlePlayerSleep.getNumSleeping() + "/" + Bukkit.getOnlinePlayers().size() + " players are sleeping.");
-                    }
-
                     CommandTweaks.singlePlayerSleep.setNumSleepingChanged(false);
                 }
 
@@ -98,8 +94,17 @@ public class SinglePlayerSleep {
                         }
                     }
 
+                    if (sleeping == null) {
+                        return;
+                    }
 
-                    CommandTweaks.singlePlayerSleep.fastForward(sleeping);
+                    if (sleeping.getWorld().isThundering()) {
+                        sleeping.getWorld().setThundering(false);
+                    }
+                    else {
+                        CommandTweaks.singlePlayerSleep.fastForward(sleeping);
+                    }
+
                 }
 
             }

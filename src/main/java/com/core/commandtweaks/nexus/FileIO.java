@@ -161,6 +161,15 @@ public class FileIO {
         Nexus.modLogConfig.set("mod-log." + formatter.format(date), playerName + " issued server command: " + command);
     }
 
+    public void setFauxChatStatus(boolean fauxChatStatus) {
+        Nexus.settingsConfig.set("faux-chat-status", fauxChatStatus);
+    }
+
+    public boolean getFauxChatStatus() {
+        return Nexus.settingsConfig.getBoolean("faux-chat-status");
+    }
+
+
     public void scheduleFileTasks(){
         BukkitScheduler scheduler = CommandTweaks.getInstance().getServer().getScheduler();
         scheduler.scheduleSyncRepeatingTask(CommandTweaks.getInstance(), new Runnable() {

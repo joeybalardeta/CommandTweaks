@@ -31,6 +31,7 @@ public class CommandManager implements CommandExecutor {
         this.subCommands.add(new InfoCommand());
         this.subCommands.add(new HelpCommand());
         this.subCommands.add(new MenuCommand());
+        this.subCommands.add(new FauxChatStatusCommand());
         Utils.consoleLog(Level.INFO, "CommandManager (Plugin command parsing/routing) online.");
     }
 

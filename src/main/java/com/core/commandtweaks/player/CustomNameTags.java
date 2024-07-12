@@ -17,7 +17,7 @@ public class CustomNameTags {
         }
         scoreBoard = Bukkit.getScoreboardManager().getMainScoreboard();
 
-        registerPlayerHealthTag();
+        registerPlayerDeathsTag();
 
         initialized = true;
     }
@@ -28,6 +28,18 @@ public class CustomNameTags {
         }
 
         Objective obj = scoreBoard.registerNewObjective("health", "health", ChatColor.RED  + "❤");
+        // Objective obj2 = scoreBoard.registerNewObjective("deaths", "deaths", ChatColor.WHITE  + " Deaths");
+        obj.setDisplaySlot(DisplaySlot.BELOW_NAME);
+        // obj2.setDisplaySlot(DisplaySlot.BELOW_NAME);
+
+    }
+
+    public void registerPlayerDeathsTag(){
+        if (scoreBoard.getObjective("death_count") != null){
+            scoreBoard.getObjective("death_count").unregister();
+        }
+
+        Objective obj = scoreBoard.registerNewObjective("death_count", "death_count", ChatColor.WHITE + " Deaths");
         // Objective obj2 = scoreBoard.registerNewObjective("deaths", "deaths", ChatColor.WHITE  + " Deaths");
         obj.setDisplaySlot(DisplaySlot.BELOW_NAME);
         // obj2.setDisplaySlot(DisplaySlot.BELOW_NAME);
