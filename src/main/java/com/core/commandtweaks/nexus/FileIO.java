@@ -8,6 +8,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitScheduler;
 
 import java.io.File;
@@ -128,6 +129,26 @@ public class FileIO {
         }
     }
 
+    // save all plugin data files without a task being scheduled
+    public void saveNoTask() {
+
+        long delay = 0L;
+
+        for (Map.Entry<File, FileConfiguration> entry : Nexus.pluginFiles.entrySet()) {
+
+            delay += 1L;
+
+            try {
+                entry.getValue().save(entry.getKey());
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+
+            // CommandTweaks.getInstance().getLogger().log(Level.INFO, "Nexus | Writing data to storage.");
+        }
+    }
+
 
 
     public void writePlayerPlus(PlayerPlus playerPlus){
@@ -166,6 +187,12 @@ public class FileIO {
     }
 
     public boolean getFauxChatStatus() {
+        // check if the faux chat status entry exists in the settings file
+        if (!Nexus.settingsConfig.contains("faux-chat-status")) {
+            Nexus.settingsConfig.set("faux-chat-status", true);
+            return true;
+        }
+
         return Nexus.settingsConfig.getBoolean("faux-chat-status");
     }
 

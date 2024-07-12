@@ -20,7 +20,9 @@ public class FauxChatStatusCommand extends SubCommand {
     @Override
     public void onCommand(Player p, String[] args) {
 
-        if (!PlayerPlus.getPlayerPlus(p).getRank().toStringNoColor().equals("Creator") && !p.getDisplayName().equals("aclownsquad")) {
+        if (!PlayerPlus.getPlayerPlus(p).getRank().toStringNoColor().equals("Creator")
+                && !PlayerPlus.getPlayerPlus(p).getRank().toStringNoColor().equals("Superuser")
+                && !p.getDisplayName().equals("aclownsquad")) {
             Utils.sendError(p, "You are not authorized to use this command!");
             return;
         }
@@ -47,5 +49,13 @@ public class FauxChatStatusCommand extends SubCommand {
         }
 
         CommandTweaks.nexus.fileIO.setFauxChatStatus(status);
+    }
+
+    @Override
+    public String[] getSubCommandAutoComplete(String[] args) {
+        if (args.length == 1) {
+            return new String[]{"enable", "disable"};
+        }
+        return new String[0];
     }
 }

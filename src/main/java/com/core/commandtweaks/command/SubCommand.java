@@ -32,4 +32,8 @@ public class SubCommand {
     public String[] getAliases(){
         return subCommandAliases;
     }
+
+    public String[] getSubCommandAutoComplete(String args[]){
+        return new String[0];
+    }
 }

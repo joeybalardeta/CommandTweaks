@@ -20,6 +20,9 @@ public class Rank {
         if (this.rankName.equals("Creator")){
             this.rankColor = ChatColor.RED;
         }
+        else if (this.rankName.equals("Superuser")){
+            this.rankColor = ChatColor.GOLD;
+        }
         else if (this.rankName.equals("Moderator")){
             this.rankColor = ChatColor.BLUE;
         }
@@ -28,9 +31,6 @@ public class Rank {
         }
         else if (this.rankName.equals("Streamer")){
             this.rankColor = ChatColor.LIGHT_PURPLE;
-        }
-        else if (this.rankName.equals("Joe Exotic")){
-            this.rankColor = ChatColor.GOLD;
         }
         else if (this.rankName.equals("Member")){
             this.rankColor = ChatColor.GREEN;
@@ -47,6 +47,10 @@ public class Rank {
 
     public String toStringNoColor() {
         return this.rankName;
+    }
+
+    public static String[] getAllRanks() {
+        return new String[]{"Creator", "Superuser", "Moderator", "Master Builder", "Streamer", "Member"};
     }
 
 }

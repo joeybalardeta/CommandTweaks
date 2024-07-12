@@ -19,13 +19,13 @@ public class InfoCommand extends SubCommand {
 
     @Override
     public void onCommand(Player p, String[] args) {
-        Utils.sendMessage(p, ChatColor.AQUA + "Plugin Name: " + ChatColor.WHITE + CommandTweaks.PLUGINNAME);
-        Utils.sendMessage(p, ChatColor.AQUA + "Authors: " + ChatColor.WHITE + "Joey Balardeta and Daniel Geva");
-        Utils.sendMessage(p, ChatColor.AQUA + "Version: " + ChatColor.WHITE + CommandTweaks.VERSION);
+        Utils.sendMessage(p, ChatColor.GOLD + "Plugin Name: " + ChatColor.WHITE + CommandTweaks.PLUGINNAME);
+        Utils.sendMessage(p, ChatColor.GOLD + "Authors: " + ChatColor.AQUA + "Joey Balardeta" + ChatColor.WHITE + "and" + ChatColor.AQUA + "Daniel Geva");
+        Utils.sendMessage(p, ChatColor.GOLD + "Version: " + ChatColor.AQUA + CommandTweaks.VERSION);
 
-        TextComponent message = new TextComponent(ChatColor.DARK_AQUA + "GitHub");
+        TextComponent message = new TextComponent(ChatColor.DARK_GRAY + "GitHub Repository");
         message.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://github.com/joeybalardeta/CommandTweaks"));
-        message.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(ChatColor.DARK_AQUA + "" + ChatColor.ITALIC + "Visit the GitHub repository!")));
+        message.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(ChatColor.GOLD + "" + ChatColor.ITALIC + "Visit the GitHub repository!")));
         Utils.sendAdvancedMessage(p, message);
     }
 }
