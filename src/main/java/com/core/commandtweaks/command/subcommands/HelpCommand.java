@@ -17,7 +17,7 @@ public class HelpCommand extends SubCommand {
     public void onCommand(Player p, String[] args) {
         Utils.sendMessage(p, ChatColor.YELLOW + "List of commands: ");
         for (SubCommand subCommand : CommandTweaks.commandManager.getSubCommands()) {
-            Utils.sendMessage(p, ChatColor.AQUA + subCommand.subCommandName + ChatColor.WHITE + " - " + ChatColor.YELLOW + subCommand.subCommandInfo);
+            Utils.sendMessage(p, ChatColor.AQUA + subCommand.subCommandName + ChatColor.WHITE + " - " + ChatColor.GOLD + subCommand.subCommandInfo);
         }
     }
 }

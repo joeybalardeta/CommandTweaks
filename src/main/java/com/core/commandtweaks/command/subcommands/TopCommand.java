@@ -39,6 +39,12 @@ public class TopCommand extends SubCommand {
 
         l = new Location(p.getWorld(), p.getLocation().getX() + xPlus, p.getWorld().getHighestBlockYAt(p.getLocation()) + 1, p.getLocation().getZ(), p.getLocation().getYaw(), p.getLocation().getPitch());
 
+        // don't teleport if the player is already at the top
+        if (p.getLocation().getY() >= p.getWorld().getHighestBlockYAt(p.getLocation())){
+            Utils.sendError(p, "You are already at the highest block!");
+            return;
+        }
+
         p.teleport(l);
     }
 }

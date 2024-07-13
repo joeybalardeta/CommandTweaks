@@ -4,6 +4,7 @@ import com.core.commandtweaks.CommandTweaks;
 import com.core.commandtweaks.gui.GUI;
 import com.core.commandtweaks.vanillaplus.particles.ParticleEffect;
 import org.bukkit.entity.Player;
+import org.bukkit.Location;
 
 import java.util.HashMap;
 
@@ -102,5 +103,8 @@ public class PlayerPlus {
             rotation += 360.0;
         }
         return rotation;
+    }
+    public Location getLocation() {
+        return this.player.getLocation();
     }
 }

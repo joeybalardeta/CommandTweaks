@@ -17,7 +17,8 @@ public class CustomNameTags {
         }
         scoreBoard = Bukkit.getScoreboardManager().getMainScoreboard();
 
-        registerPlayerDeathsTag();
+        // registerPlayerDeathsTag();
+        registerPlayerHealthTag();
 
         initialized = true;
     }

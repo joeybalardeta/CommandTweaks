@@ -45,6 +45,21 @@ public class Utils {
 
     }
 
+    public static void sendPrivateFauxChatMessage(Player player, Player target, String message) {
+        PlayerPlus playerPlus = PlayerPlus.getPlayerPlus(player);
+        TextComponent prefix = new TextComponent(ChatColor.WHITE + "[" + playerPlus.getRank().toString() + ChatColor.WHITE + "] ");
+        TextComponent username = new TextComponent(ChatColor.AQUA + "" + ChatColor.ITALIC + player.getName());
+
+        username.setClickEvent(new ClickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD, player.getUniqueId().toString()));
+        username.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(ChatColor.WHITE + player.getName() + "\n" + player.getUniqueId())));
+        prefix.addExtra(username);
+        prefix.addExtra(ChatColor.WHITE + ": ");
+        prefix.addExtra(message);
+
+        target.spigot().sendMessage(prefix);
+
+    }
+
     public static void consoleLog(Level level, String message){
         CommandTweaks.getInstance().getLogger().log(level, message);
     }

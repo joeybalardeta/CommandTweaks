@@ -35,6 +35,7 @@ public class CommandManager implements CommandExecutor, TabCompleter {
         this.subCommands.add(new MenuCommand());
         this.subCommands.add(new ParticlesCommand());
         this.subCommands.add(new FauxChatStatusCommand());
+        this.subCommands.add(new CoordsCommand());
         Utils.consoleLog(Level.INFO, "CommandManager (Plugin command parsing/routing) online.");
     }
 
