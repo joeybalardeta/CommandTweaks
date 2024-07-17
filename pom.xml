@@ -6,7 +6,7 @@
 
     <groupId>com.core.commandtweaks</groupId>
     <artifactId>commandtweaks</artifactId>
-    <version>0.3</version>
+    <version>0.4</version>
     <packaging>jar</packaging>
 
     <name>Commandtweaks</name>

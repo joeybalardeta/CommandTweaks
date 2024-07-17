@@ -28,9 +28,9 @@ public class PlayerEvent implements Listener {
         }
 
 
-        CommandTweaks.nexus.fileIO.loadPlayerPlus(event.getPlayer());
+        PlayerPlus playerPlus = PlayerPlus.load(event.getPlayer());
 
-        // delayed event, probably gonna use this to send messages to users on join.
+        // delayed event, probably gonna use this to send messages to users on join
         BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
         scheduler.scheduleSyncDelayedTask(instance, new Runnable() {
             public void run() {
@@ -41,7 +41,7 @@ public class PlayerEvent implements Listener {
 
     @EventHandler
     public void onLeave(PlayerQuitEvent event){
-        CommandTweaks.nexus.fileIO.writePlayerPlus(PlayerPlus.getPlayerPlus(event.getPlayer()));
+        PlayerPlus.getPlayerPlus(event.getPlayer()).save();
         PlayerPlus.getPlayerPlus(event.getPlayer()).removePlayerPlus();
     }
 

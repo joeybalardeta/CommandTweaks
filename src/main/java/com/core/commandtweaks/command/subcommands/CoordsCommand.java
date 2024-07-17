@@ -13,6 +13,7 @@ public class CoordsCommand extends SubCommand {
         this.subCommandName = "coords";
         this.subCommandInfo = "Send your coordinates to others";
         this.subCommandAliases = new String[0];
+        this.adminCommand = false;
     }
 
     @Override

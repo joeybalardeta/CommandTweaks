@@ -11,6 +11,7 @@ public class ParticlesCommand extends SubCommand {
         this.subCommandName = "particles";
         this.subCommandInfo = "Set custom particle effect";
         this.subCommandAliases = new String[0];
+        this.adminCommand = true;
     }
 
     @Override

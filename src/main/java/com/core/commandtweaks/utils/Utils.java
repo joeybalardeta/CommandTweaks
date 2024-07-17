@@ -3,7 +3,6 @@ package com.core.commandtweaks.utils;
 import com.core.commandtweaks.CommandTweaks;
 import com.core.commandtweaks.player.PlayerPlus;
 import net.md_5.bungee.api.ChatColor;
-import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -30,17 +29,30 @@ public class Utils {
 
     public static void sendFauxChatMessage(Player player, String message) {
         PlayerPlus playerPlus = PlayerPlus.getPlayerPlus(player);
-        TextComponent prefix = new TextComponent(ChatColor.WHITE + "[" + playerPlus.getRank().toString() + ChatColor.WHITE + "] ");
+        TextComponent chatMessage = new TextComponent("");
+        TextComponent prefix = new TextComponent(ChatColor.WHITE + "[" + playerPlus.getRank().getName() + ChatColor.WHITE + "] ");
         TextComponent username = new TextComponent(ChatColor.AQUA + player.getName());
+
+        if (PlayerPlus.getPlayerPlus(player).getRank().getDescription() != null) {
+            String description = PlayerPlus.getPlayerPlus(player).getRank().getDescription();
+            if (Utils.isLink(PlayerPlus.getPlayerPlus(player).getRank().getDescriptionNoColor())) {
+                description = ChatColor.UNDERLINE + description;
+                prefix.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, PlayerPlus.getPlayerPlus(player).getRank().getDescriptionNoColor()));
+            }
+
+            prefix.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(description)));
+        }
 
         username.setClickEvent(new ClickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD, player.getUniqueId().toString()));
         username.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(ChatColor.WHITE + player.getName() + "\n" + player.getUniqueId())));
-        prefix.addExtra(username);
-        prefix.addExtra(ChatColor.WHITE + ": ");
-        prefix.addExtra(message);
+
+        chatMessage.addExtra(prefix);
+        chatMessage.addExtra(username);
+        chatMessage.addExtra(ChatColor.WHITE + ": ");
+        chatMessage.addExtra(message);
 
         for (Player online : Bukkit.getOnlinePlayers()) {
-            online.spigot().sendMessage(prefix);
+            online.spigot().sendMessage(chatMessage);
         }
 
     }
@@ -62,5 +74,13 @@ public class Utils {
 
     public static void consoleLog(Level level, String message){
         CommandTweaks.getInstance().getLogger().log(level, message);
+    }
+
+    public static boolean isLink(String message) {
+        if (message == null) {
+            return false;
+        }
+
+        return message.matches(".*\\b(?:https?|ftp|file)://\\S+\\b.*");
     }
 }

@@ -1,6 +1,7 @@
 package com.core.commandtweaks.command.subcommands;
 
 import com.core.commandtweaks.command.SubCommand;
+import com.core.commandtweaks.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -12,6 +13,7 @@ public class HomeCommand extends SubCommand {
         this.subCommandName = "Home";
         this.subCommandInfo = "Teleport player to their spawn point";
         this.subCommandAliases = new String[0];
+        this.adminCommand = true;
     }
 
     @Override

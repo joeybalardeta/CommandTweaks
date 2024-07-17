@@ -15,12 +15,13 @@ public class InfoCommand extends SubCommand {
         this.subCommandName = "info";
         this.subCommandInfo = "Print out info about the CommandTweaks plugin";
         this.subCommandAliases = new String[0];
+        this.adminCommand = false;
     }
 
     @Override
     public void onCommand(Player p, String[] args) {
         Utils.sendMessage(p, ChatColor.GOLD + "Plugin Name: " + ChatColor.WHITE + CommandTweaks.PLUGINNAME);
-        Utils.sendMessage(p, ChatColor.GOLD + "Authors: " + ChatColor.AQUA + "Joey Balardeta" + ChatColor.WHITE + "and" + ChatColor.AQUA + "Daniel Geva");
+        Utils.sendMessage(p, ChatColor.GOLD + "Authors: " + ChatColor.AQUA + "Joey Balardeta");
         Utils.sendMessage(p, ChatColor.GOLD + "Version: " + ChatColor.AQUA + CommandTweaks.VERSION);
 
         TextComponent message = new TextComponent(ChatColor.DARK_GRAY + "GitHub Repository");

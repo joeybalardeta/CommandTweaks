@@ -1,5 +1,6 @@
 package com.core.commandtweaks.nexus;
 
+import com.core.commandtweaks.player.PlayerPlus;
 import com.core.commandtweaks.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -37,7 +38,7 @@ public class Nexus {
         fileIO.scheduleFileTasks();
 
         for (Player online : Bukkit.getOnlinePlayers()) {
-            fileIO.loadPlayerPlus(online);
+            PlayerPlus playerPlus = PlayerPlus.load(online);
         }
 
         Utils.consoleLog(Level.INFO, "Nexus (Data Storage/Management) online.");

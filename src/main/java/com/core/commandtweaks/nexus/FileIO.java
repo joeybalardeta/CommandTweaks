@@ -104,12 +104,16 @@ public class FileIO {
 
     // save all plugin data files
     public void save() {
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            PlayerPlus playerPlus = PlayerPlus.getPlayerPlus(player);
+            playerPlus.save();
+        }
 
         long delay = 0L;
 
         for (Map.Entry<File, FileConfiguration> entry : Nexus.pluginFiles.entrySet()) {
 
-            delay += 1L;
+            delay += 20L;
 
             // schedule a delayed task of saving a file to spread the load out more evenly
             BukkitScheduler scheduler = CommandTweaks.getInstance().getServer().getScheduler();
@@ -131,15 +135,16 @@ public class FileIO {
 
     // save all plugin data files without a task being scheduled
     public void saveNoTask() {
-
-        long delay = 0L;
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            PlayerPlus playerPlus = PlayerPlus.getPlayerPlus(player);
+            playerPlus.save();
+        }
 
         for (Map.Entry<File, FileConfiguration> entry : Nexus.pluginFiles.entrySet()) {
-
-            delay += 1L;
-
             try {
+
                 entry.getValue().save(entry.getKey());
+
             } catch (IOException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -147,25 +152,6 @@ public class FileIO {
 
             // CommandTweaks.getInstance().getLogger().log(Level.INFO, "Nexus | Writing data to storage.");
         }
-    }
-
-
-
-    public void writePlayerPlus(PlayerPlus playerPlus){
-        Nexus.playerDataConfig.set("users." + playerPlus.getPlayer().getUniqueId() + ".rank", playerPlus.getRank().toStringNoColor());
-        Nexus.playerDataConfig.set("users." + playerPlus.getPlayer().getUniqueId() + ".name", playerPlus.getPlayer().getDisplayName());
-    }
-
-    public void loadPlayerPlus(Player p){
-        PlayerPlus playerPlus = new PlayerPlus(p);
-
-        Rank rank = new Rank(Nexus.playerDataConfig.getString("users." + p.getUniqueId() + ".rank"));
-
-        playerPlus.setRank(rank);
-
-        Faction faction = null;
-
-        playerPlus.setFaction(faction);
     }
 
     public void logPlayerCount(){

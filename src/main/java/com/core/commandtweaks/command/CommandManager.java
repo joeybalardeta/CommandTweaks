@@ -29,6 +29,7 @@ public class CommandManager implements CommandExecutor, TabCompleter {
         instance.getCommand(this.getRootCommand()).setTabCompleter(this);
         this.subCommands.add(new TopCommand());
         this.subCommands.add(new RankCommand());
+        this.subCommands.add(new RankDescriptionCommand());
         this.subCommands.add(new SaveCommand());
         this.subCommands.add(new InfoCommand());
         this.subCommands.add(new HelpCommand());
@@ -58,10 +59,17 @@ public class CommandManager implements CommandExecutor, TabCompleter {
 
         for (SubCommand sc : subCommands) {
             if (sc.getName().equals(args[0])){
-                sc.onCommand(p, args);
+                if (sc.checkPermission(p)){
+                    sc.onCommand(p, args);
+                    return true;
+                }
+                else {
+                    Utils.sendError(p, "You are not authorized to use this command!");
+                }
             }
         }
 
+        Utils.sendError(p, "Command not found! Use /ct help for a list of commands.");
         return false;
     }
 
@@ -85,7 +93,7 @@ public class CommandManager implements CommandExecutor, TabCompleter {
         List<String> autoCompleteStrs = new ArrayList<String>();
         if (args.length == 1) {
             for (SubCommand sc : this.subCommands) {
-                if (sc.getName().toLowerCase().startsWith(args[0].toLowerCase())) {
+                if (sc.getName().toLowerCase().startsWith(args[0].toLowerCase()) && sc.checkPermission(p)) {
                     autoCompleteStrs.add(sc.getName());
                 }
             }
@@ -98,7 +106,6 @@ public class CommandManager implements CommandExecutor, TabCompleter {
             for (int i = 1; i < args.length; i++) {
                 autocompleteArgs[i - 1] = args[i];
             }
-
 
             for (SubCommand sc : this.subCommands) {
                 if (sc.getName().equalsIgnoreCase(args[0])) {

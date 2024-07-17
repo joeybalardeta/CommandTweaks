@@ -15,18 +15,11 @@ public class FauxChatStatusCommand extends SubCommand {
         this.subCommandName = "fauxchat";
         this.subCommandInfo = "Set the status of Faux Chat";
         this.subCommandAliases = new String[0];
+        this.adminCommand = true;
     }
 
     @Override
     public void onCommand(Player p, String[] args) {
-
-        if (!PlayerPlus.getPlayerPlus(p).getRank().toStringNoColor().equals("Creator")
-                && !PlayerPlus.getPlayerPlus(p).getRank().toStringNoColor().equals("Superuser")
-                && !p.getDisplayName().equals("aclownsquad")) {
-            Utils.sendError(p, "You are not authorized to use this command!");
-            return;
-        }
-
         if (args.length < 2) {
             Utils.sendError(p, "Incorrect amount of arguments!");
             return;

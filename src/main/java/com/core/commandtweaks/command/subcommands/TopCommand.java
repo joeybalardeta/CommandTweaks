@@ -15,6 +15,7 @@ public class TopCommand extends SubCommand {
         this.subCommandName = "top";
         this.subCommandInfo = "Teleport player to the top y coordinate at their location";
         this.subCommandAliases = new String[0];
+        this.adminCommand = false;
     }
 
 
@@ -25,6 +26,11 @@ public class TopCommand extends SubCommand {
 
         if (p.getWorld().getEnvironment().equals(World.Environment.NETHER)){
             Utils.sendError(p, "You cannot use '/ct top' in the Nether!");
+            return;
+        }
+
+        if (p.getWorld().getEnvironment().equals(World.Environment.THE_END)){
+            Utils.sendError(p, "You cannot use '/ct top' in the The End!");
             return;
         }
 

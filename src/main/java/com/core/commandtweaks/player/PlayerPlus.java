@@ -2,6 +2,7 @@ package com.core.commandtweaks.player;
 
 import com.core.commandtweaks.CommandTweaks;
 import com.core.commandtweaks.gui.GUI;
+import com.core.commandtweaks.nexus.Nexus;
 import com.core.commandtweaks.vanillaplus.particles.ParticleEffect;
 import org.bukkit.entity.Player;
 import org.bukkit.Location;
@@ -37,12 +38,31 @@ public class PlayerPlus {
             this.particleEffect.end();
         }
 
-        CommandTweaks.nexus.fileIO.writePlayerPlus(this);
+        this.save();
+    }
+
+    public static PlayerPlus load(Player p){
+        PlayerPlus playerPlus = new PlayerPlus(p);
+
+        Rank rank = CommandTweaks.rankManager.getRank(Nexus.playerDataConfig.getString("users." + p.getUniqueId() + ".rank"));
+        playerPlus.setRank(rank);
+
+        String description = Nexus.playerDataConfig.getString("users." + p.getUniqueId() + ".rankdesc");
+        playerPlus.getRank().setDescription(description);
+
+        return playerPlus;
+    }
+
+    public void save(){
+        Nexus.playerDataConfig.set("users." + this.getPlayer().getUniqueId() + ".name", this.getPlayer().getDisplayName());
+
+        Nexus.playerDataConfig.set("users." + this.getPlayer().getUniqueId() + ".rank", this.getRank().getNameNoColor());
+        Nexus.playerDataConfig.set("users." + this.getPlayer().getUniqueId() + ".rankdesc", this.getRank().getDescriptionNoColor());
     }
 
     public void setRank(Rank rank){
         this.rank = rank;
-        CommandTweaks.nexus.fileIO.writePlayerPlus(this);
+        this.save();
     }
 
     public void setFaction(Faction faction){

@@ -5,6 +5,7 @@ import com.core.commandtweaks.command.CommandManager;
 import com.core.commandtweaks.event.EventManager;
 import com.core.commandtweaks.nexus.Nexus;
 import com.core.commandtweaks.player.CustomNameTags;
+import com.core.commandtweaks.player.RankManager;
 import com.core.commandtweaks.vanguard.Vanguard;
 import com.core.commandtweaks.vanillaplus.singleplayersleep.SinglePlayerSleep;
 import org.bukkit.Bukkit;
@@ -14,13 +15,15 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.util.logging.Level;
 
 public final class CommandTweaks extends JavaPlugin {
-    public static String VERSION = "0.3.0";
+    public static String VERSION = "0.4.0";
     public static String PLUGINNAME = "CommandTweaks";
     private static CommandTweaks instance;
 
     public static EventManager eventManager;
 
     public static CommandManager commandManager;
+
+    public static RankManager rankManager;
 
     public static CustomNameTags customNameTags;
 
@@ -44,6 +47,9 @@ public final class CommandTweaks extends JavaPlugin {
 
         commandManager = new CommandManager();
         commandManager.init();
+
+        rankManager = new RankManager();
+        rankManager.init();
 
         customNameTags = new CustomNameTags();
         customNameTags.init();
