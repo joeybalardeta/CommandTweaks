@@ -33,7 +33,7 @@ public class Utils {
         TextComponent prefix = new TextComponent(ChatColor.WHITE + "[" + playerPlus.getRank().getName() + ChatColor.WHITE + "] ");
         TextComponent username = new TextComponent(ChatColor.AQUA + player.getName());
 
-        if (PlayerPlus.getPlayerPlus(player).getRank().getDescription() != null) {
+        if (PlayerPlus.getPlayerPlus(player).getRank().getDescriptionNoColor() != null) {
             String description = PlayerPlus.getPlayerPlus(player).getRank().getDescription();
             if (Utils.isLink(PlayerPlus.getPlayerPlus(player).getRank().getDescriptionNoColor())) {
                 description = ChatColor.UNDERLINE + description;
