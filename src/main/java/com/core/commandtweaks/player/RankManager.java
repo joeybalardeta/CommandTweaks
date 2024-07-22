@@ -35,15 +35,16 @@ public class RankManager {
             return this.defaultRank().clone();
         }
 
+        // if rank with rankName exists, return a clone of it
         for (Rank rank : this.ranks) {
             if (rank.getNameNoColor().equalsIgnoreCase(rankName)) {
                 return rank.clone();
             }
         }
 
-        Rank rank = new Rank();
+        // if rank with rankName does not exist, return a new rank with rankName
+        Rank rank = new CustomRank();
         rank.setName(rankName);
-        rank.setNameColor(this.defaultRank().getNameColor());
 
         return rank;
     }

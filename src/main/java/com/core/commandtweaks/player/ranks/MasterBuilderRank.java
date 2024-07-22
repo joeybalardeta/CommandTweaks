@@ -6,7 +6,7 @@ import net.md_5.bungee.api.ChatColor;
 public class MasterBuilderRank extends Rank {
     public MasterBuilderRank() {
         this.name = "Master Builder";
-        this.nameColor = ChatColor.DARK_AQUA;
+        this.nameColor = ChatColor.DARK_PURPLE;
         this.description = "They're one of the best builders on the server!";
         this.defaultRank = false;
         this.admin = false;

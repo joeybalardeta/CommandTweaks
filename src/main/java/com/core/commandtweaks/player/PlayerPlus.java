@@ -62,7 +62,6 @@ public class PlayerPlus {
 
     public void setRank(Rank rank){
         this.rank = rank;
-        this.save();
     }
 
     public void setFaction(Faction faction){

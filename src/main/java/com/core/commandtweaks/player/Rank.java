@@ -31,9 +31,6 @@ public class Rank {
     }
 
     public void setDescription(String description) {
-        if (description == null) {
-            return;
-        }
         this.description = description;
     }
 
